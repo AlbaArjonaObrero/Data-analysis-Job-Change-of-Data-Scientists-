@@ -96,7 +96,9 @@ SELECT
   Count_Gender/Total*100 AS Percentage_STEM
 FROM 
   `hr-analysis-portfolio-1.HR_Analytics.Group_by_gender_STEM`
- --Results
-  Percentage_STEM
-70.163911750466838  (Male)
-6.4181478663808011  (Female)
+
+[{
+  "Percentage_STEM": "70.163911750466838"
+}, {
+  "Percentage_STEM": "6.4181478663808011"
+}]
