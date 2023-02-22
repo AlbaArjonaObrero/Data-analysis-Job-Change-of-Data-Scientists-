@@ -1,0 +1,102 @@
+-- Analysis of the gender variable to determine the number of women and men who would apply for a data scientist position.
+SELECT 
+    gender AS Gender,
+    COUNT(*) AS Count_Gender,
+      (SELECT
+        COUNT (gender) 
+      FROM 
+       `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+      WHERE
+        gender= "Male" OR
+        gender= "Female"
+       ) AS Total,
+  FROM 
+   `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+  WHERE 
+   gender IN ('Male','Female')
+  GROUP BY 
+    gender; 
+--Results
+Gender	Count_Gender	Total
+Male	    13221	      14459
+Female	   1238	      14459
+
+-- Percentage of women and men, using the above query as a temporary table. 
+With group_by_gender AS
+  (SELECT 
+    gender AS Gender,
+    COUNT(*) AS Count_Gender,
+      (SELECT
+        COUNT (gender) 
+      FROM 
+        `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+      WHERE
+         gender= "Male" OR
+        gender= "Female"
+       ) AS Total,
+  FROM 
+    `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+  WHERE 
+    gender IN ('Male','Female')
+  GROUP BY 
+    gender)
+SELECT 
+  Count_Gender / Total * 100 AS Percentage
+FROM 
+  `hr-analysis-portfolio-1.HR_Analytics.Group_by_gender`
+--Results  
+ Percentage
+91.43785877308251  (Male)
+8.5621412269174915  (Female)
+
+--Analysis of the number of men and women coming from STEM disciplines. 
+SELECT 
+    gender AS Gender,
+    COUNT(*) AS Count_Gender,
+      (SELECT
+        COUNT (gender) 
+      FROM 
+      `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+      WHERE
+      gender= "Male" OR
+      gender= "Female"
+     ) AS Total,
+  FROM 
+   `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+  WHERE 
+    gender IN ('Male','Female') AND major_discipline ='STEM'
+  GROUP BY 
+    gender; 
+--Results
+Gender	Count_Gender	Total
+Male	    10145	      14459
+Female	    928	      14459
+  
+  --Percentage of women and men in STEM
+ With Gender_STEM AS
+(SELECT 
+    gender AS Gender,
+    COUNT(*) AS Count_Gender,
+        (SELECT
+        COUNT (gender) 
+        FROM 
+      `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+        WHERE
+      gender= "Male" OR
+      gender= "Female"
+      ) AS Total,
+    FROM 
+  `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+    WHERE 
+    gender IN ('Male', 'Female') AND 
+    major_discipline IN ('STEM')
+  GROUP BY 
+    gender)
+SELECT 
+  Count_Gender/Total*100 AS Percentage_STEM
+FROM 
+  `hr-analysis-portfolio-1.HR_Analytics.Group_by_gender_STEM`
+ --Results
+  Percentage_STEM
+70.163911750466838  (Male)
+6.4181478663808011  (Female)
