@@ -1,0 +1,35 @@
+--Men and women in STEM in citys where the development index is above or equal to average
+SELECT 
+    gender,
+    COUNT(*) 
+  FROM 
+  `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+  WHERE 
+  gender IN ('Male','Female') AND city_development_index >= 0.828 AND major_discipline='STEM'
+  GROUP BY gender; 
+  --RESULTS 
+  [{
+  "gender": "Male",
+  "f0_": "6857"
+}, {
+  "gender": "Female",
+  "f0_": "625"
+}]
+
+--Men and women in STEM in citys where the development index is under average
+SELECT 
+    gender,
+    COUNT(*) 
+  FROM 
+  `hr-analysis-portfolio-1.HR_Analytics.dataset_train`
+  WHERE 
+  gender IN ('Male','Female') AND city_development_index < 0.828 AND major_discipline='STEM'
+  GROUP BY gender; 
+--RESULTS 
+[{
+  "gender": "Male",
+  "f0_": "3288"
+}, {
+  "gender": "Female",
+  "f0_": "303"
+}]
