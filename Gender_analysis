@@ -16,10 +16,17 @@ SELECT
    gender IN ('Male','Female')
   GROUP BY 
     gender; 
---Results
-Gender	Count_Gender	Total
-Male	    13221	      14459
-Female	   1238	      14459
+    
+--RESULTS
+[{
+  "Gender": "Male",
+  "Count_Gender": "13221",
+  "Total": "14459"
+}, {
+  "Gender": "Female",
+  "Count_Gender": "1238",
+  "Total": "14459"
+}]
 
 -- Percentage of women and men, using the above query as a temporary table. 
 With group_by_gender AS
@@ -44,11 +51,12 @@ SELECT
   Count_Gender / Total * 100 AS Percentage
 FROM 
   `hr-analysis-portfolio-1.HR_Analytics.Group_by_gender`
---Results  
- Percentage
-91.43785877308251  (Male)
-8.5621412269174915  (Female)
-
+--RESULTS  
+[{
+  "Percentage": "91.43785877308251"
+}, {
+  "Percentage": "8.5621412269174915"
+}]
 --Analysis of the number of men and women coming from STEM disciplines. 
 SELECT 
     gender AS Gender,
@@ -67,10 +75,16 @@ SELECT
     gender IN ('Male','Female') AND major_discipline ='STEM'
   GROUP BY 
     gender; 
---Results
-Gender	Count_Gender	Total
-Male	    10145	      14459
-Female	    928	      14459
+--RESULTS
+[{
+  "Gender": "Male",
+  "Count_Gender": "10145",
+  "Total": "14459"
+}, {
+  "Gender": "Female",
+  "Count_Gender": "928",
+  "Total": "14459"
+}]
   
   --Percentage of women and men in STEM
  With Gender_STEM AS
@@ -96,7 +110,7 @@ SELECT
   Count_Gender/Total*100 AS Percentage_STEM
 FROM 
   `hr-analysis-portfolio-1.HR_Analytics.Group_by_gender_STEM`
-
+  -- RESULTS
 [{
   "Percentage_STEM": "70.163911750466838"
 }, {
