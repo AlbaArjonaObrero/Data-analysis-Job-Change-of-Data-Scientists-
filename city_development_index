@@ -1,0 +1,13 @@
+--Calculation of the minimum and maximum values of the development index and its mean. 
+SELECT
+  MIN (city_development_index) AS Min_development_index, 
+  MAX (city_development_index) AS Max_development_index,
+  AVG (city_development_index) AS Average_development_index
+  FROM 
+    `hr-analysis-portfolio-1.HR_Analytics.dataset_train` 
+--RESULTS
+ [{
+  "Min_development_index": "0.44799999999999995",
+  "Max_development_index": "0.94900000000000007",
+  "Average_development_index": "0.828848000835162"
+}]
